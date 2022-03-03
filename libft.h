@@ -6,7 +6,7 @@
 /*   By: bassouev <bassouev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:04:55 by bassouev          #+#    #+#             */
-/*   Updated: 2022/02/24 17:44:17 by bassouev         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:37:52 by bassouev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_printf(const char *format, ...);
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 #endif
