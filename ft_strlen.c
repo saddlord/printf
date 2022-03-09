@@ -6,11 +6,11 @@
 /*   By: bassouev <bassouev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:11:23 by bassouev          #+#    #+#             */
-/*   Updated: 2022/02/12 18:38:22 by bassouev         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:32:20 by bassouev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 size_t	ft_strlen(const char *str)
 {

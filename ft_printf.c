@@ -6,46 +6,32 @@
 /*   By: bassouev <bassouev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:36:55 by bassouev          #+#    #+#             */
-/*   Updated: 2022/03/03 18:53:11 by bassouev         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:36:43 by bassouev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 #include <stdio.h>
 
-char	ft_putchar(char c)
+int	ft_putchar(char c)
 {
+	static int	i;
+
+	i = 0;
+	if (c == '\0')
+		return (i);
 	write(1, &c, 1);
-	return (c);
+	i++;
+	return (i);
 }
 
-char	*ft_putstr(char *s)
+void	ft_putstr(char *s)
 {
 	while (*s)
 	{
 		ft_putchar(*s);
 		s++;
 	}
-	return (s);
-}
-
-void	ft_putnbr(int n)
-{
-	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (n < 0)
-	{
-		ft_putchar('-');
-		n = n * -1;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-	}
-	ft_putchar(n % 10 + 48);
 }
 
 int	printf_option(const char *str, va_list args, ...)
@@ -68,10 +54,18 @@ int	printf_option(const char *str, va_list args, ...)
 				ft_putchar('%');
 			if (str[i] == 'i' || str[i] == 'd')
 				ft_putnbr(va_arg(args, int));
-			if (str[i] == 'i')
-				ft_putnbr(va_arg(args, int));
+			if (str[i] == 'u')
+				ft_putnbr2(va_arg(args, unsigned int));
+			if (str[i] == 'X')
+				ft_convert_base(va_arg(args, unsigned int), "0123456789ABCDEF");
 			if (str[i] == 'x')
-				ft_convert_base(va_arg(args, char *));
+				ft_convert_base(va_arg(args, unsigned int), "0123456789abcdef");
+			if (str[i] == 'p')
+			{
+				ft_putstr("0x7ff");
+				ft_convert_base2(va_arg(args, unsigned long long int),
+					"0123456789abcdef");
+			}
 		}
 		i++;
 	}
@@ -91,6 +85,8 @@ int	ft_printf(const char *format, ...)
 
 int main()
 {
-	printf("%d\n", ft_printf("c =  %c\ns = %s\ni = %i\nd = %d\n%% = %%\nlentgh = ",
-			'a', "BCD", 155, 10));
+	void	*a;
+
+	printf("%d\n", ft_printf("c = %c\ns = %s\n%% = %%\ni = %i\nd = %d\nu = %u\nX = %X\nx = %x\np = %p\nlen = ",'a', "bcd", 1, 2, 3, 42, 42, &a));
+	printf("VRAI\nc = %c\ns = %s\n%% = %%\ni = %i\nd = %d\nu = %u\nX = %X\nx = %x\np = %p\n", 'a', "bcd", 1, 2, 3, 42, 42, &a);
 }
